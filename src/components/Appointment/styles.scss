@@ -101,11 +101,12 @@ $appointment-height: 11rem;
       align-items: center;
     }
   }
+//whats the point of this?
 
-  &:last-of-type &__add,
-  &:last-of-type &__card {
-    display: none;
-  }
+  // &:last-of-type &__add,
+  // &:last-of-type &__card {
+  //   display: none;
+  // }
 
   &__actions {
     margin-top: 1rem;
