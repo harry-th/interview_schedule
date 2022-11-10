@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 
 import "components/Application.scss";
 
@@ -6,14 +6,13 @@ import { useApplicationData } from "hooks/useApplicationData";
 
 import DayList from "./DayList";
 import Appointment from "./Appointment";
-import Axios from "axios";
 
 import { getAppointmentsForDay, getInterviewersForDay, addInterviews } from "../helpers/selectors"
 
-export default function Application(props) {
+export default function Application() {
+
   const { state, setDay, bookInterview, cancelInterview } = useApplicationData()
-  
- let interviewers = getInterviewersForDay(state, state.day)
+  let interviewers = getInterviewersForDay(state, state.day)
 
   return (
     <main className="layout">

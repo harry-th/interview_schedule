@@ -45,3 +45,21 @@ export const addInterviews = (state) => {
     }
     return object
   }
+  
+  export const calculateSpots = (daysId, appointments, days) => {
+    let count = 0;
+    days[daysId - 1].appointments.forEach(item => {
+        if (appointments[item].interview === null) {
+            count += 1
+        }
+    })
+    return count
+}
+export const findDayId = (appId, days) => {
+    for (const day of days) {
+        if (day.appointments.includes(appId)) {
+            return day.id
+        }
+    }
+    return -1
+}
