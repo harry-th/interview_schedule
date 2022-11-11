@@ -42,7 +42,6 @@ export function useApplicationData() {
         appointments: {}
     });
     useEffect(() => {
-
         Promise.all([
             Axios.get('/api/days'),
             Axios.get('/api/appointments'),
@@ -64,7 +63,7 @@ export function useApplicationData() {
                 //runs reducer with Set_Interview
                 dispatch({ type, id, interview });
             };
-
+            return () => {socket.close();};
         };
     }, []);
     return {
