@@ -42,6 +42,7 @@ export default function Appointment(props) {
             transition(ERROR_DELETE, true);
         });
     }
+    //checks interviews and corrects mode for when web sockets changes interviews on another client
     useEffect(() => {
         if(props.interview && mode === EMPTY) {
             transition(SHOW);

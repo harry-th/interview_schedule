@@ -61,6 +61,7 @@ export function useApplicationData() {
         socket.onopen = () => {
             socket.onmessage = (e) => {
                 let { type, interview, id } = JSON.parse(e.data);
+                //runs reducer with Set_Interview
                 dispatch({ type, id, interview });
             };
 
@@ -70,6 +71,7 @@ export function useApplicationData() {
         state,
         setDay: day => dispatch({ type: 'setApplicationData', day }),
         bookInterview: (id) => {
+            //returns function with once fed with id
             return function (interview) {
                 const appointment = {
                     ...state.appointments[id],
