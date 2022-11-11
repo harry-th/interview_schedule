@@ -21,6 +21,18 @@ export function useApplicationData() {
                 interviewers
             };
         }
+        if (action.type === "SET_INTERVIEW") {
+            let days = state.days;
+            let appointments = { ...state.appointments, [action.id]: { ...state.appointments[action.id], interview: action.interview } };
+            let dayId = findDayId(action.id, days);
+            days[dayId - 1].spots = calculateSpots(dayId, appointments, state.days);
+            return {
+                ...state,
+                days: [...days],
+                appointments
+            };
+        };
+
         let error = new Error(`Tried to reduce with unsupported action type: ${action.type}`);
         throw error;
     };
@@ -30,6 +42,7 @@ export function useApplicationData() {
         appointments: {}
     });
     useEffect(() => {
+
         Promise.all([
             Axios.get('/api/days'),
             Axios.get('/api/appointments'),
@@ -42,8 +55,17 @@ export function useApplicationData() {
                 interviewers: all[2].data
             });
         });
-    }, []);
 
+
+        const socket = new WebSocket(process.env.REACT_APP_WEBSOCKET_URL);
+        socket.onopen = () => {
+            socket.onmessage = (e) => {
+                let { type, interview, id } = JSON.parse(e.data);
+                dispatch({ type, id, interview });
+            };
+
+        };
+    }, []);
     return {
         state,
         setDay: day => dispatch({ type: 'setApplicationData', day }),

@@ -14,6 +14,8 @@ export default function Application() {
   const { state, setDay, bookInterview, cancelInterview } = useApplicationData();
   let interviewers = getInterviewersForDay(state, state.day);
 
+
+
   return (
     <main className="layout">
       <section className="sidebar">

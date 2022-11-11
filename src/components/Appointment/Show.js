@@ -28,5 +28,5 @@ export default function Show(props) {
                 </section>
             </section>
         </main>
-    )
+    );
 }

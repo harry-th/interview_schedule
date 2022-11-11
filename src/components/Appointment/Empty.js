@@ -10,5 +10,5 @@ export default function Empty(props) {
                 alt="Add"
             />
         </main>
-    )
+    );
 }

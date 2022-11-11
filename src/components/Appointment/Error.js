@@ -14,5 +14,5 @@ export default function Error(props) {
                 alt="Close"
             />
         </main>
-    )
+    );
 }

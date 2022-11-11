@@ -1,4 +1,4 @@
-import React from "react"
+import React from "react";
 
 import "components/InterviewerListItem.scss";
 import classNames from "classnames";
@@ -18,5 +18,5 @@ export default function InterviewerListItem(props) {
             />
             {props.selected && props.name}
         </li>
-    )
+    );
 }

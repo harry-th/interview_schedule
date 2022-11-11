@@ -55,6 +55,7 @@ export const addInterviews = (state) => {
     });
     return count;
 };
+
 export const findDayId = (appId, days) => {
     for (const day of days) {
         if (day.appointments.includes(appId)) {
