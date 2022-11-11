@@ -7,12 +7,12 @@ import { useApplicationData } from "hooks/useApplicationData";
 import DayList from "./DayList";
 import Appointment from "./Appointment";
 
-import { getAppointmentsForDay, getInterviewersForDay, addInterviews } from "../helpers/selectors"
+import { getAppointmentsForDay, getInterviewersForDay, addInterviews } from "../helpers/selectors";
 
 export default function Application() {
 
-  const { state, setDay, bookInterview, cancelInterview } = useApplicationData()
-  let interviewers = getInterviewersForDay(state, state.day)
+  const { state, setDay, bookInterview, cancelInterview } = useApplicationData();
+  let interviewers = getInterviewersForDay(state, state.day);
 
   return (
     <main className="layout">
@@ -46,7 +46,7 @@ export default function Application() {
             interviewers={interviewers}
             key={item.id}
             {...item}
-          />
+          />;
         })}
       </section>
     </main>

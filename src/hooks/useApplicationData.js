@@ -1,28 +1,29 @@
 import { useEffect, useReducer } from "react";
 import Axios from "axios";
-import { findDayId, calculateSpots } from '../helpers/selectors'
+import { findDayId, calculateSpots } from '../helpers/selectors';
 
 
 export function useApplicationData() {
     const reducer = (state, action) => {
         if (action.type === 'setDay') {
-            return { ...state, day: action.day }
+            return { ...state, day: action.day };
         }
         if (action.type === 'setApplicationData') {
-            let day = action.day || state.day
-            let days = action.days || state.days
-            let appointments = action.appointments || state.appointments
-            let interviewers = action.interviewers || state.interviewers
+            let day = action.day || state.day;
+            let days = action.days || state.days;
+            let appointments = action.appointments || state.appointments;
+            let interviewers = action.interviewers || state.interviewers;
             return {
                 ...state,
                 day,
                 days,
                 appointments,
                 interviewers
-            }
+            };
         }
-        return state || new Error(`Tried to reduce with unsupported action type: ${action.type}`);
-    }
+        let error = new Error(`Tried to reduce with unsupported action type: ${action.type}`);
+        throw error;
+    };
     const [state, dispatch] = useReducer(reducer, {
         day: "Monday",
         days: [],
@@ -39,9 +40,9 @@ export function useApplicationData() {
                 days: all[0].data,
                 appointments: all[1].data,
                 interviewers: all[2].data
-            })
+            });
         });
-    }, [])
+    }, []);
 
     return {
         state,
@@ -57,29 +58,29 @@ export function useApplicationData() {
                     [id]: appointment
                 };
                 return Axios.put('/api/appointments/' + id, appointment).then(() => {
-                    let days = [...state.days]
-                    let dayId = findDayId(id, state.days)
-                    days[dayId - 1].spots = calculateSpots(dayId, appointments, state.days)
+                    let days = [...state.days];
+                    let dayId = findDayId(id, state.days);
+                    days[dayId - 1].spots = calculateSpots(dayId, appointments, state.days);
                     dispatch({
                         type: 'setApplicationData',
                         appointments, days
-                    })
-                })
-            }
+                    });
+                });
+            };
         }, cancelInterview: (id) => {
             const appointments = {
                 ...state.appointments,
                 [id]: { ...state.appointments[id], interview: null }
-            }
+            };
             return Axios.delete('/api/appointments/' + id).then(() => {
-                let days = [...state.days]
-                let dayId = findDayId(id, state.days)
-                days[dayId - 1].spots = calculateSpots(dayId, appointments, state.days)
+                let days = [...state.days];
+                let dayId = findDayId(id, state.days);
+                days[dayId - 1].spots = calculateSpots(dayId, appointments, state.days);
                 dispatch({
                     type: 'setApplicationData',
                     appointments, days
-                })
-            })
+                });
+            });
         }
-    }
+    };
 }

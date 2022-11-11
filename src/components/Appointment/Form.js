@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 import InterviewerList from "../InterviewerList";
-import Button from "../Button.js"
+import Button from "../Button.js";
 
 export default function Form(props) {
     const [student, setStudent] = useState(props.student || "");
@@ -19,18 +19,18 @@ export default function Form(props) {
           }
       
         props.onSave(student, interviewer);
-        setError('')
+        setError('');
       }
 
     const reset = () => {
         setStudent('');
-        setError('')
-        setInterviewer(null)
-    }
+        setError('');
+        setInterviewer(null);
+    };
     const cancel = () => {
         props.onCancel();
         reset();
-    }
+    };
     return (
         <main className="appointment__card appointment__card--create">
             <section className="appointment__card-left">
@@ -59,5 +59,5 @@ export default function Form(props) {
                 </section>
             </section>
         </main>
-    )
+    );
 }

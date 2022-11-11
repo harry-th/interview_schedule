@@ -31,24 +31,24 @@ describe("Form", () => {
 
 
     it("validates that the student name is not blank", () => {
-        const onSave = jest.fn()
+        const onSave = jest.fn();
         const {getByText} = render(<Form 
             interviewers={interviewers}
-            onSave={onSave} />)
-        fireEvent.click(getByText("Save"))
+            onSave={onSave} />);
+        fireEvent.click(getByText("Save"));
 
         expect(getByText(/student name cannot be blank/i)).toBeInTheDocument();
         expect(onSave).not.toHaveBeenCalled();
     });
 
     it("validates that the interviewer cannot be null", () => {
-        const onSave = jest.fn()
+        const onSave = jest.fn();
         const {getByText} = render(<Form 
             interviewers={interviewers}
             onSave={onSave} 
             student="Lydia Miller-Jones"
-            />)
-        fireEvent.click(getByText("Save"))
+            />);
+        fireEvent.click(getByText("Save"));
 
         expect(getByText(/please select an interviewer/i)).toBeInTheDocument();
         expect(onSave).not.toHaveBeenCalled();

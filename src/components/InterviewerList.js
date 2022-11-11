@@ -1,8 +1,8 @@
-import React from "react"
-import PropTypes from "prop-types"
+import React from "react";
+import PropTypes from "prop-types";
 
-import 'components/InterviewList.scss'
-import InterviewerListItem from "./InterviewerListItem"
+import 'components/InterviewList.scss';
+import InterviewerListItem from "./InterviewerListItem";
 
 export default function InterviewerList(props) {
 
@@ -18,13 +18,13 @@ export default function InterviewerList(props) {
                         avatar={item.avatar}
                         selected={item.id === props.value}
                         setInterviewer={() => props.onChange(item.id)}
-                    />
+                    />;
                 })}
             </ul>
         </section>
-    )
+    );
 }
 
 InterviewerList.propTypes = {
     interviewers: PropTypes.array.isRequired
-}
+};
